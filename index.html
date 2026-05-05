@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+      <link rel="icon" href="https://fav.farm" />
+</head>
+<body>
+
+    <div class="main">
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // get sec, min, hour hand of clock and then move them
+        const secondHand=document.querySelector('.second-hand');
+        const minuteHand=document.querySelector('.min-hand');
+        const hourHand=document.querySelector('.hour-hand');
+
+function setDate(){
+const now= new Date();
+const second=now.getSeconds();
+const minute=now.getMinutes();
+const hour=now.getHours();
+
+const secondInDeg=((second/60)*360)+90;
+const minuteDeg=((minute/60)*360)+90;
+const hourDeg=(((hour%12)*30)+(minute*0.5)+90);
+
+//console.log(hour, minute, second);
+
+if(second===0)
+{
+    secondHand.classList.add('no-transition');
+}else{
+    secondHand.classList.remove('no-transition');
+}
+if(minute===0)
+{
+    minuteHand.classList.add('no-transition');
+}else{
+    minuteHand.classList.remove('no-transition');
+}
+
+if((hour%12)===0 && minute===0)
+{
+    hourHand.classList.add('no-transition');
+}
+else{
+    hourHand.classList.remove('no-transition');
+}
+
+secondHand.style.transform=`rotate(${secondInDeg}deg)`;
+minuteHand.style.transform=`rotate(${minuteDeg}deg)`;
+hourHand.style.transform=`rotate(${hourDeg}deg)`;
+
+}
+
+//call the function after every 1s
+setInterval(setDate,1000);
+
+    </script>
+    
+</body>
+
+</html>
